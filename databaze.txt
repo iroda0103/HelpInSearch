@@ -1,0 +1,25 @@
+Help in Search (topilmalar va yo'qotilgan buyumlarni tezroq topish imkoni)
+
+user
+-id 
+-firt_name
+-last_name
+-username
+-email
+-phone
+
+things
+-id
+-name
+-title
+-description
+-type['found','lost']
+-user_id
+-address_id
+
+address
+-id
+-name
+-region
+-district
+-addition
