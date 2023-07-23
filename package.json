@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node sr/index.js",
-    "dev":"nodemon src/index.js"
+    "dev": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "Muminova Iroda",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1"
+  }
 }
