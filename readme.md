@@ -22,8 +22,8 @@ GET /api/findings
 Parametrlar:
 
 - `q`: buyumlarni  nomi orqali qidirish
-- `type`: buyumlarni turi bo'yicha saralash (`found`, `lost`)
-- `sort`: sort obyekti
+- `type`: buyumlarni turi bo'yicha saralash (`found` or `lost`)
+- `sort`: sort obyekti(by,order)
 - `filter`: filter obyekti
 
 HTTP 200
@@ -69,3 +69,106 @@ HTTP 200
 }
 }
 
+
+## Mavjud userlarni olish uchun API
+
+```
+GET /api/users
+```
+
+HTTP 200
+
+```json
+{
+    "data": [
+        {
+            "id": 1,
+            "first_name": "John",
+            "last_name": "Doe",
+            "username": "johndoe",
+            "password": "123456",
+            "phone": "1234567890",
+            "email": "johndoe@example.com",
+            "role": "admin"
+        },
+        {
+            "id": 2,
+            "first_name": "Jane",
+            "last_name": "Smith",
+            "username": "janesmith",
+            "password": "abcdef",
+            "phone": "9876543210",
+            "email": "janesmith@example.com",
+            "role": "admin"
+        },
+        {
+            "id": 3,
+            "first_name": "Bob",
+            "last_name": "Johnson",
+            "username": "bobjohnson",
+            "password": "qwerty",
+            "phone": "4567891230",
+            "email": "bobjohnson@example.com",
+            "role": "user"
+        }
+    ]
+}
+
+## Login qilish uchun API
+
+```
+POST /api/users/login
+```
+
+HTTP 200
+
+```json
+{
+    "data": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo4fSwiaWF0IjoxNjkwMjgxNjczfQ.ujik9wfVC30eUDSMMtSpB3HnuBNa9W4KXPW6BZnE4es"
+}
+
+
+## Userni tahrirlash   uchun API
+
+```
+PATCH /api/users/me
+```
+
+HTTP 200
+
+```json
+{
+    "data": {
+        "id": 8,
+        "first_name": "Iroda",
+        "last_name": "Mo'minova",
+        "username": "iroda01",
+        "password": "1234",
+        "phone": "99888111111",
+        "email": "iroda1@example.com",
+        "role": "user"
+    }
+}
+
+
+## Userni o'chirish   uchun API
+
+```
+DELETE /api/users/me
+```
+
+HTTP 200
+
+```json
+{
+    "data": {
+        "id": 8,
+        "first_name": "Iroda",
+        "last_name": "Mo'minova",
+        "username": "iroda01",
+        "password": "1234",
+        "phone": "99888111111",
+        "email": "iroda1@example.com",
+        "role": "user"
+    }
+}

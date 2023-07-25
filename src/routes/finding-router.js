@@ -6,7 +6,7 @@ const isLoggedIn = require('../shared/auth/isLoggidin')
 const router=express.Router()
 const upload = multer({ dest: 'uploads/' })
 
-router.get('/findings',isLoggedIn,getFinding)
-router.post('/findings',isLoggedIn,upload.single('img'),postFindings)
+router.get('/api/findings',isLoggedIn,getFinding)
+router.post('/api/findings',isLoggedIn,upload.single('img'),postFindings)
 
 module.exports=router
