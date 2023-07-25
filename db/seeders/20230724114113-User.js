@@ -11,7 +11,7 @@ module.exports = {
         password: '123456',
         phone: '1234567890',
         email: 'johndoe@example.com',
-        role:'admin'
+        role:'admin',
       },
       {
         first_name: 'Jane',

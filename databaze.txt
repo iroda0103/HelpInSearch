@@ -7,19 +7,23 @@ user
 -username
 -email
 -phone
+-password
 
 things
 -id
 -name
--title
 -description
 -type['found','lost']
 -user_id
 -address_id
+-img
+-address_addition
 
 address
 -id
--name
 -region
 -district
 -addition
+addition: "Xo'ja Orif Revgariy ziyoratgohi oldidan"
+  addition: "Ark maydoni oldida"
+  addition: "Yangi bozor oldida"

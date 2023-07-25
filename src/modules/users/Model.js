@@ -3,6 +3,7 @@ const sequelize = require("../../db");
 
 class User extends Model {}
 
+
 User.init(
   {
     // Model attributes are defined here

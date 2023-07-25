@@ -1,44 +1,30 @@
-# YBKY saralash bosqichi topshirig'i
+# Help in search
 
-Impactt co-working markazi rezidentlariga majlis xonalarni oldindan oson band qilish uchun tizim yaratmoqchi va bunda sizning yordamingiz kerak.
+Ushbu loyiha yo'qolgan buyumlarni topish va topib olingan buyumlarni o'z egasiga qaytarishga ko'maklashadi
 
-Backend yo'nalishiga topshirganlar tizim uchun REST API tuzishi kerak bo'ladi. Frontend yo'nalishi qatnashchilaridan esa ushbu tizim uchun foydalanuvchi interfeysini yasash kutiladi.
+Backend yo'nalishida tizim uchun REST API da va Sequelize ORMda tuzilgan.
 
 ## Tizimning funksional talablari:
 
-- Xonalar haqida ma'lumot saqlash va taqdim qila olish;
-- Xonani ko'rsatilgan vaqt oralig'i uchun band qila olish;
-- Bir xonaning band qilingan vaqtlari ustma-ust tushmasligi kerak;
-- Autentifikatsiya (login) imkoniyatini qo'shish talab qilinmaydi.
+-Yo'qolgan va topib olingan buyumlarni ma'lumotlarini saqlash va taqdim qila olish;
+- Name va,addressi bo'yicha sort qila olish;
+-Name bo'yicha qidira olish
+- Userlar Autentifikatsiya (login) imkoniyatiga ega.
 
-## Ko'p so'ralgan savollar:
 
-- Qaysi dasturlash tilidan foydalanish kerak? Istalgan!
-- Kutubxona va freymvorklardan foydalanish mumkinmi? Ha.
-- Qaysi ma'lumotlar omboridan foydalanish mumkin? Fuksional talablarni qondiradigan istalgan ma'lumotlar omboridan foydalanishingiz mumkin.
 
-## Loyihani topshirish uchun talablar.
-
-- GitHubda `private` repozitoriya yarating
-- Ishingizni bosqichma-bosqich `commit` qilib boring
-- GitHub repozitoriyaning `settings` qismidan `ybky42` foydalanuvchisini `Collaborator` sifatida qo'shing.
-- **20-iyunga qadar loyihani yakunlab, `Pull Request` yaratib, `ybky42` foydalanuvchisini `Reviewer` sifatida qo'shing.**
-- Savollaringizni ushbu `gist` ostidagi izohlarda qoldiring.
-
----
-
-## Mavjud xonalarni olish uchun API
+## Mavjud findingslarni olish uchun API
 
 ```
-GET /api/rooms
+GET /api/findings
 ```
 
 Parametrlar:
 
-- `search`: Xona nomi orqali qidirish
-- `type`: xona turi bo'yicha saralash (`focus`, `team`, `conference`)
-- `page`: sahifa tartib raqami
-- `page_size`: sahifadagi maksimum natijalar soni
+- `q`: findinslarni  nomi orqali qidirish
+- `type`: buyumlarni turi bo'yicha saralash (`found`, `lost`)
+- `sort`: sort obyekti
+- `filter`: filter obyekti
 
 HTTP 200
 
@@ -47,115 +33,39 @@ HTTP 200
   "page": 1,
   "count": 3,
   "page_size": 10,
-  "results": [
-    {
-      "id": 1,
-      "name": "mytaxi",
-      "type": "focus",
-      "capacity": 1
-    },
-    {
-      "id": 2,
-      "name": "workly",
-      "type": "team",
-      "capacity": 5
-    },
-    {
-      "id": 3,
-      "name": "express24",
-      "type": "conference",
-      "capacity": 15
-    }
-  ]
-}
-```
-
----
-
-## Xonani id orqali olish uchun API
-
-```
-GET /api/rooms/{id}
-```
-
-HTTP 200
-
-```json
-{
-  "id": 3,
-  "name": "express24",
-  "type": "conference",
-  "capacity": 15
-}
-```
-
-HTTP 404
-
-```json
-{
-  "error": "topilmadi"
-}
-```
-
----
-
-## Xonaning bo'sh vaqtlarini olish uchun API
-
-```
-GET /api/rooms/{id}/availability
-```
-
-Parametrlar:
-
-- `date`: sana (ko'rsatilmasa bugungi sana olinadi)
-
-Response 200
-
-```json
-[
   {
-    "start": "05-06-2023 9:00:00",
-    "end": "05-06-2023 11:00:00"
-  },
-  {
-    "start": "05-06-2023 13:00:00",
-    "end": "05-06-2023 18:00:00"
-  }
-]
-```
-
----
-
-## Xonani band qilish uchun API
-
-```
-POST /api/rooms/{id}/book
-```
-
-```json
-{
-  "resident": {
-    "name": "Anvar Sanayev"
-  },
-  "start": "05-06-2023 9:00:00",
-  "end": "05-06-2023 10:00:00"
+    "data": [
+        {
+            "id": 1,
+            "name": "Telefon",
+            "description": "Yo'qolgan telefon",
+            "type": "found",
+            "user_id": 1,
+            "address_id": 1,
+            "img": "phone.jpg",
+            "address_addition": "123-kvartira"
+        },
+        {
+            "id": 2,
+            "name": "noutbuk",
+            "description": "Noutbuk topildi",
+            "type": "lost",
+            "user_id": 2,
+            "address_id": 2,
+            "img": "laptop.jpg",
+            "address_addition": "Apt 456"
+        },
+        {
+            "id": 3,
+            "name": "hamyon",
+            "description": "Yo'qotilgan hamyon",
+            "type": "lost",
+            "user_id": 3,
+            "address_id": 2,
+            "img": "wallet.jpg",
+            "address_addition": ""
+        }
+    ]
 }
-```
-
----
-
-HTTP 201: Xona muvaffaqiyatli band qilinganda
-
-```json
-{
-  "message": "xona muvaffaqiyatli band qilindi"
 }
-```
 
-HTTP 410: Tanlangan vaqtda xona band bo'lganda
-
-```json
-{
-  "error": "uzr, siz tanlagan vaqtda xona band"
-}
-```

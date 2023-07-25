@@ -4,9 +4,9 @@ const config = require("./shared/config");
 const router=require('./routes')
 const User=require('./modules/users/Model')
 
-User.findAll().then((users)=>{
-    console.log('dsds',users[0].dataValues);
-})
+// User.findAll().then((users)=>{
+//     console.log('dsds',users[0].dataValues);
+// })
 
 const app = express();
 app.use(express.json());
