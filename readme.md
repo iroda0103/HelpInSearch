@@ -21,7 +21,7 @@ GET /api/findings
 
 Parametrlar:
 
-- `q`: findinslarni  nomi orqali qidirish
+- `q`: buyumlarni  nomi orqali qidirish
 - `type`: buyumlarni turi bo'yicha saralash (`found`, `lost`)
 - `sort`: sort obyekti
 - `filter`: filter obyekti
